@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlphaNifty - Premium Investment & Wealth Calculators</title>
+    <meta name="description" content="Calculate your Step-Up SIP, Inflation-Adjusted SWP, and Lumpsum mutual fund returns with AlphaNifty's corporate-style wealth builders.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="index.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- App Container -->
+    <div class="app-wrapper">
+        
+        <!-- Header -->
+        <header class="main-header">
+            <div class="header-container">
+                <!-- AlphaNifty Logo in SVG -->
+                <div class="logo-container">
+                    <a href="#" class="logo-link" id="logo-home">
+                        <div class="logo-3d-container">
+                            <img src="logo-transparent.png" alt="AlphaNifty Logo" class="logo-img layer-1">
+                            <img src="logo-transparent.png" alt="AlphaNifty Logo" class="logo-img layer-2">
+                            <img src="logo-transparent.png" alt="AlphaNifty Logo" class="logo-img layer-3">
+                            <img src="logo-transparent.png" alt="AlphaNifty Logo" class="logo-img layer-4">
+                            <img src="logo-transparent.png" alt="AlphaNifty Logo" class="logo-img layer-5">
+                            <img src="logo-transparent.png" alt="AlphaNifty Logo" class="logo-img layer-6">
+                            <img src="logo-transparent.png" alt="AlphaNifty Logo" class="logo-img layer-7">
+                            <img src="logo-transparent.png" alt="AlphaNifty Logo" class="logo-img layer-8">
+                            <img src="logo-transparent.png" alt="AlphaNifty Logo" class="logo-img layer-9">
+                            <img src="logo-transparent.png" alt="AlphaNifty Logo" class="logo-img layer-10">
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Main Nav Tabs -->
+                <nav class="nav-tabs">
+                    <button class="tab-btn active" id="tab-sip" onclick="switchTab('sip')">
+                        <i class="fa-solid fa-chart-line"></i> SIP Calculator
+                    </button>
+                    <button class="tab-btn" id="tab-swp" onclick="switchTab('swp')">
+                        <i class="fa-solid fa-hand-holding-dollar"></i> SWP Calculator
+                    </button>
+                    <button class="tab-btn" id="tab-lumpsum" onclick="switchTab('lumpsum')">
+                        <i class="fa-solid fa-coins"></i> Lumpsum Calculator
+                    </button>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Main Body -->
+        <main class="main-content">
+            <div class="content-container">
+                
+                <!-- Hero Info & Welcome -->
+                <section class="hero-section">
+                    <h1 class="hero-title" id="hero-title">Systematic Investment Plan <span class="text-green">SIP Calculator</span></h1>
+                    <p class="hero-subtitle" id="hero-subtitle">Plan your regular monthly investments, leverage the compounding power of annual step-ups, and visualize your future wealth growth in real-time.</p>
+                </section>
+
+                <div class="calculator-grid">
+                    
+                    <!-- LEFT COLUMN: INPUTS -->
+                    <div class="inputs-column">
+                        <div class="calculator-card input-card">
+                        
+                        <!-- SIP INPUT CONTAINER -->
+                        <div id="sip-inputs" class="inputs-group active">
+                            <h2 class="section-title"><i class="fa-solid fa-chart-line text-green"></i> SIP Parameters</h2>
+                            
+                            <!-- Monthly Investment -->
+                            <div class="input-wrapper">
+                                <div class="input-labels">
+                                    <label for="sip-monthly-slider">Monthly Investment</label>
+                                    <div class="input-box-wrapper">
+                                        <span class="currency-prefix">₹</span>
+                                        <input type="number" id="sip-monthly-value" min="500" max="1000000" step="500" value="25000">
+                                    </div>
+                                </div>
+                                <input type="range" id="sip-monthly-slider" class="styled-slider green-slider" min="500" max="1000000" step="500" value="25000">
+                                <div class="slider-limits">
+                                    <span>₹500</span>
+                                    <span>₹10,00,000</span>
+                                </div>
+                            </div>
+
+                            <!-- Expected Return -->
+                            <div class="input-wrapper">
+                                <div class="input-labels">
+                                    <label for="sip-return-slider">Expected Return (p.a.)</label>
+                                    <div class="input-box-wrapper">
+                                        <input type="number" id="sip-return-value" min="1" max="30" step="0.1" value="12">
+                                        <span class="currency-suffix">%</span>
+                                    </div>
+                                </div>
+                                <input type="range" id="sip-return-slider" class="styled-slider blue-slider" min="1" max="30" step="0.5" value="12">
+                                <div class="slider-limits">
+                                    <span>1%</span>
+                                    <span>30%</span>
+                                </div>
+                            </div>
+
+                            <!-- Time Period -->
+                            <div class="input-wrapper">
+                                <div class="input-labels">
+                                    <label for="sip-years-slider">Time Period</label>
+                                    <div class="input-box-wrapper">
+                                        <input type="number" id="sip-years-value" min="1" max="40" step="1" value="15">
+                                        <span class="currency-suffix">Year</span>
+                                    </div>
+                                </div>
+                                <input type="range" id="sip-years-slider" class="styled-slider gold-slider" min="1" max="40" step="1" value="15">
+                                <div class="slider-limits">
+                                    <span>1 Year</span>
+                                    <span>40 Years</span>
+                                </div>
+                            </div>
+
+                            <!-- Step-Up SIP Controls -->
+                            <div class="step-up-toggle-card">
+                                <div class="toggle-header">
+                                    <div class="toggle-info">
+                                        <span class="toggle-title">Annual Step-Up SIP</span>
+                                        <span class="toggle-desc">Increase your investment yearly to outpace inflation and build wealth faster.</span>
+                                    </div>
+                                    <label class="switch">
+                                        <input type="checkbox" id="sip-stepup-toggle" checked>
+                                        <span class="slider round"></span>
+                                    </label>
+                                </div>
+                                
+                                <div id="sip-stepup-controls" class="stepup-inputs-body active">
+                                    <div class="step-type-tabs">
+                                        <button class="step-type-btn active" id="step-type-percent" onclick="toggleStepUpType('percent')">Percentage (%)</button>
+                                        <button class="step-type-btn" id="step-type-fixed" onclick="toggleStepUpType('fixed')">Fixed Amount (₹)</button>
+                                    </div>
+
+                                    <!-- Step-Up Percentage -->
+                                    <div class="input-wrapper" id="step-percent-wrapper">
+                                        <div class="input-labels">
+                                            <label for="sip-step-percent-slider">Annual Increase (%)</label>
+                                            <div class="input-box-wrapper">
+                                                <input type="number" id="sip-step-percent-value" min="0" max="50" step="1" value="10">
+                                                <span class="currency-suffix">%</span>
+                                            </div>
+                                        </div>
+                                        <input type="range" id="sip-step-percent-slider" class="styled-slider green-slider" min="0" max="50" step="1" value="10">
+                                        <div class="slider-limits">
+                                            <span>0%</span>
+                                            <span>50%</span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Step-Up Fixed Amount -->
+                                    <div class="input-wrapper hidden" id="step-fixed-wrapper">
+                                        <div class="input-labels">
+                                            <label for="sip-step-fixed-slider">Annual Increase (₹)</label>
+                                            <div class="input-box-wrapper">
+                                                <span class="currency-prefix">₹</span>
+                                                <input type="number" id="sip-step-fixed-value" min="500" max="100000" step="500" value="2000">
+                                            </div>
+                                        </div>
+                                        <input type="range" id="sip-step-fixed-slider" class="styled-slider green-slider" min="500" max="100000" step="500" value="2000">
+                                        <div class="slider-limits">
+                                            <span>₹500</span>
+                                            <span>₹1,00,000</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- SWP INPUT CONTAINER -->
+                        <div id="swp-inputs" class="inputs-group">
+                            <h2 class="section-title"><i class="fa-solid fa-hand-holding-dollar text-blue"></i> SWP Parameters</h2>
+                            
+                            <!-- Total Investment -->
+                            <div class="input-wrapper">
+                                <div class="input-labels">
+                                    <label for="swp-total-slider">Total Investment</label>
+                                    <div class="input-box-wrapper">
+                                        <span class="currency-prefix">₹</span>
+                                        <input type="number" id="swp-total-value" min="10000" max="100000000" step="10000" value="5000000">
+                                    </div>
+                                </div>
+                                <input type="range" id="swp-total-slider" class="styled-slider green-slider" min="10000" max="20000000" step="50000" value="5000000">
+                                <div class="slider-limits">
+                                    <span>₹10K</span>
+                                    <span>₹2 Cr</span>
+                                </div>
+                            </div>
+
+                            <!-- Monthly Withdrawal -->
+                            <div class="input-wrapper">
+                                <div class="input-labels">
+                                    <label for="swp-withdraw-slider">Monthly Withdrawal</label>
+                                    <div class="input-box-wrapper">
+                                        <span class="currency-prefix">₹</span>
+                                        <input type="number" id="swp-withdraw-value" min="500" max="1000000" step="500" value="30000">
+                                    </div>
+                                </div>
+                                <input type="range" id="swp-withdraw-slider" class="styled-slider blue-slider" min="500" max="200000" step="500" value="30000">
+                                <div class="slider-limits">
+                                    <span>₹500</span>
+                                    <span>₹2L</span>
+                                </div>
+                            </div>
+
+                            <!-- Expected Return -->
+                            <div class="input-wrapper">
+                                <div class="input-labels">
+                                    <label for="swp-return-slider">Expected Return (p.a.)</label>
+                                    <div class="input-box-wrapper">
+                                        <input type="number" id="swp-return-value" min="1" max="30" step="0.1" value="8">
+                                        <span class="currency-suffix">%</span>
+                                    </div>
+                                </div>
+                                <input type="range" id="swp-return-slider" class="styled-slider blue-slider" min="1" max="30" step="0.5" value="8">
+                                <div class="slider-limits">
+                                    <span>1%</span>
+                                    <span>30%</span>
+                                </div>
+                            </div>
+
+                            <!-- Inflation Rate -->
+                            <div class="input-wrapper">
+                                <div class="input-labels">
+                                    <label for="swp-inflation-slider">Annual Inflation (Withdrawal Step-Up)</label>
+                                    <div class="input-box-wrapper">
+                                        <input type="number" id="swp-inflation-value" min="0" max="15" step="0.1" value="6">
+                                        <span class="currency-suffix">%</span>
+                                    </div>
+                                </div>
+                                <input type="range" id="swp-inflation-slider" class="styled-slider gold-slider" min="0" max="15" step="0.5" value="6">
+                                <div class="slider-limits">
+                                    <span>0% (Flat)</span>
+                                    <span>15% Inflation</span>
+                                </div>
+                                <p class="input-help-text">Increases monthly withdrawals by this percentage annually to preserve buying power.</p>
+                            </div>
+
+                            <!-- Time Period -->
+                            <div class="input-wrapper">
+                                <div class="input-labels">
+                                    <label for="swp-years-slider">Time Period</label>
+                                    <div class="input-box-wrapper">
+                                        <input type="number" id="swp-years-value" min="1" max="40" step="1" value="20">
+                                        <span class="currency-suffix">Year</span>
+                                    </div>
+                                </div>
+                                <input type="range" id="swp-years-slider" class="styled-slider gold-slider" min="1" max="40" step="1" value="20">
+                                <div class="slider-limits">
+                                    <span>1 Year</span>
+                                    <span>40 Years</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- LUMPSUM INPUT CONTAINER -->
+                        <div id="lumpsum-inputs" class="inputs-group">
+                            <h2 class="section-title"><i class="fa-solid fa-coins text-gold"></i> Lumpsum Parameters</h2>
+                            
+                            <!-- Total Investment -->
+                            <div class="input-wrapper">
+                                <div class="input-labels">
+                                    <label for="lumpsum-total-slider">Total Investment</label>
+                                    <div class="input-box-wrapper">
+                                        <span class="currency-prefix">₹</span>
+                                        <input type="number" id="lumpsum-total-value" min="1000" max="50000000" step="1000" value="500000">
+                                    </div>
+                                </div>
+                                <input type="range" id="lumpsum-total-slider" class="styled-slider green-slider" min="1000" max="10000000" step="5000" value="500000">
+                                <div class="slider-limits">
+                                    <span>₹1,00,000</span>
+                                    <span>₹1 Cr</span>
+                                </div>
+                            </div>
+
+                            <!-- Expected Return -->
+                            <div class="input-wrapper">
+                                <div class="input-labels">
+                                    <label for="lumpsum-return-slider">Expected Return (p.a.)</label>
+                                    <div class="input-box-wrapper">
+                                        <input type="number" id="lumpsum-return-value" min="1" max="30" step="0.1" value="12">
+                                        <span class="currency-suffix">%</span>
+                                    </div>
+                                </div>
+                                <input type="range" id="lumpsum-return-slider" class="styled-slider blue-slider" min="1" max="30" step="0.5" value="12">
+                                <div class="slider-limits">
+                                    <span>1%</span>
+                                    <span>30%</span>
+                                </div>
+                            </div>
+
+                            <!-- Time Period -->
+                            <div class="input-wrapper">
+                                <div class="input-labels">
+                                    <label for="lumpsum-years-slider">Time Period</label>
+                                    <div class="input-box-wrapper">
+                                        <input type="number" id="lumpsum-years-value" min="1" max="40" step="1" value="15">
+                                        <span class="currency-suffix">Year</span>
+                                    </div>
+                                </div>
+                                <input type="range" id="lumpsum-years-slider" class="styled-slider gold-slider" min="1" max="40" step="1" value="15">
+                                <div class="slider-limits">
+                                    <span>1 Year</span>
+                                    <span>40 Years</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Actions bar -->
+                        <div class="inputs-footer-actions">
+                            <button id="btn-share" class="btn-secondary" onclick="shareCalculation()">
+                                <i class="fa-solid fa-share-nodes"></i> Share Link
+                            </button>
+                            <button id="btn-reset" class="btn-link" onclick="resetInputs()">
+                                        <i class="fa-solid fa-rotate-left"></i> Reset
+                            </button>
+                        </div>
+                        </div>
+
+                    </div>
+
+                    <!-- RIGHT COLUMN: RESULTS & 3D INFOGRAPHICS -->
+                    <div class="results-column">
+                        
+                        <!-- 3D CYLINDER COMPUNDING VISUALIZER CARD (Always Visible) -->
+                        <div class="calculator-card visualizer-card-3d">
+                            <div class="visualizer-3d-header">
+                                <h2 class="section-title"><i class="fa-solid fa-cube text-green"></i> Wealth Projection</h2>
+                                <div class="speed-badge-wrapper">
+                                    <span id="txt-compounding-speed" class="speed-badge font-outfit">1.0x Growth</span>
+                                </div>
+                            </div>
+                            
+                            <div class="visualizer-3d-wrapper">
+                                <div class="scene-3d">
+                                    <!-- SVG cylinder growth visualizer -->
+                                    <svg id="svg-3d-infographic" viewBox="0 0 500 285" width="100%" height="100%">
+                                        <defs>
+                                            <!-- Radial Contact Shadow Gradient -->
+                                            <radialGradient id="contactShadow" cx="50%" cy="50%" r="50%">
+                                                <stop offset="0%" stop-color="#0F172A" stop-opacity="0.25" />
+                                                <stop offset="55%" stop-color="#0F172A" stop-opacity="0.08" />
+                                                <stop offset="100%" stop-color="#0F172A" stop-opacity="0" />
+                                            </radialGradient>
+
+                                            <!-- Radial Floor Glow (spotlight under cylinders) -->
+                                            <radialGradient id="floorGlow" cx="50%" cy="75%" r="60%">
+                                                <stop offset="0%" stop-color="#E2E8F0" stop-opacity="0.5" />
+                                                <stop offset="50%" stop-color="#F1F5F9" stop-opacity="0.2" />
+                                                <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0" />
+                                            </radialGradient>
+                                            
+                                            <!-- Cylinder Gold Gradients (Realistic Specular Highlight at 72%) -->
+                                            <linearGradient id="cylGoldSide" x1="0%" y1="0%" x2="100%" y2="0%">
+                                                <stop offset="0%" stop-color="#7A4E00" />
+                                                <stop offset="35%" stop-color="#D48800" />
+                                                <stop offset="60%" stop-color="#F5A623" />
+                                                <stop offset="71%" stop-color="#FFEFA3" />
+                                                <stop offset="75%" stop-color="#FFEFA3" />
+                                                <stop offset="82%" stop-color="#F5A623" />
+                                                <stop offset="100%" stop-color="#6E4400" />
+                                            </linearGradient>
+                                            <linearGradient id="cylGoldTop" x1="0%" y1="100%" x2="100%" y2="0%">
+                                                <stop offset="0%" stop-color="#D48800" />
+                                                <stop offset="100%" stop-color="#FFE082" />
+                                            </linearGradient>
+                                            
+                                            <!-- Cylinder Blue Gradients (Realistic Specular Highlight at 72%) -->
+                                            <linearGradient id="cylBlueSide" x1="0%" y1="0%" x2="100%" y2="0%">
+                                                <stop offset="0%" stop-color="#0F2459" />
+                                                <stop offset="35%" stop-color="#1B4DA1" />
+                                                <stop offset="60%" stop-color="#2563EB" />
+                                                <stop offset="71%" stop-color="#D6E4FF" />
+                                                <stop offset="75%" stop-color="#D6E4FF" />
+                                                <stop offset="82%" stop-color="#2563EB" />
+                                                <stop offset="100%" stop-color="#0E2152" />
+                                            </linearGradient>
+                                            <linearGradient id="cylBlueTop" x1="0%" y1="100%" x2="100%" y2="0%">
+                                                <stop offset="0%" stop-color="#1D4ED8" />
+                                                <stop offset="100%" stop-color="#93C5FD" />
+                                            </linearGradient>
+                                            
+                                            <!-- Cylinder Green Gradients (Realistic Specular Highlight at 72%) -->
+                                            <linearGradient id="cylGreenSide" x1="0%" y1="0%" x2="100%" y2="0%">
+                                                <stop offset="0%" stop-color="#013A2B" />
+                                                <stop offset="35%" stop-color="#078C64" />
+                                                <stop offset="60%" stop-color="#10B981" />
+                                                <stop offset="71%" stop-color="#C6F6D5" />
+                                                <stop offset="75%" stop-color="#C6F6D5" />
+                                                <stop offset="82%" stop-color="#10B981" />
+                                                <stop offset="100%" stop-color="#013628" />
+                                            </linearGradient>
+                                            <linearGradient id="cylGreenTop" x1="0%" y1="100%" x2="100%" y2="0%">
+                                                <stop offset="0%" stop-color="#047857" />
+                                                <stop offset="100%" stop-color="#A7F3D0" />
+                                            </linearGradient>
+
+                                            <!-- Grid Floor Clip Path -->
+                                            <clipPath id="gridClip">
+                                                <rect x="0" y="200" width="500" height="75" />
+                                            </clipPath>
+                                        </defs>
+
+                                        <!-- Floor Glow Spotlight Background -->
+                                        <rect x="0" y="195" width="500" height="85" fill="url(#floorGlow)" />
+
+                                        <!-- Perspective Grid Floor -->
+                                        <g clip-path="url(#gridClip)" stroke="#E2E8F0" stroke-width="1.2" opacity="0.75">
+                                            <!-- Horizontal Grid Lines -->
+                                            <line x1="0" y1="205" x2="500" y2="205" stroke-width="0.8" />
+                                            <line x1="0" y1="213" x2="500" y2="213" stroke-width="0.9" />
+                                            <line x1="0" y1="222" x2="500" y2="222" stroke-width="1.0" />
+                                            <line x1="0" y1="233" x2="500" y2="233" stroke-width="1.1" />
+                                            <line x1="0" y1="246" x2="500" y2="246" stroke-width="1.2" />
+                                            <line x1="0" y1="261" x2="500" y2="261" stroke-width="1.3" />
+                                            <line x1="0" y1="278" x2="500" y2="278" stroke-width="1.4" />
+
+                                            <!-- Converging Radial Lines -->
+                                            <line x1="250" y1="90" x2="-120" y2="285" />
+                                            <line x1="250" y1="90" x2="-20" y2="285" />
+                                            <line x1="250" y1="90" x2="70" y2="285" />
+                                            <line x1="250" y1="90" x2="140" y2="285" />
+                                            <line x1="250" y1="90" x2="200" y2="285" />
+                                            <line x1="250" y1="90" x2="250" y2="285" stroke-width="1.5" />
+                                            <line x1="250" y1="90" x2="300" y2="285" />
+                                            <line x1="250" y1="90" x2="360" y2="285" />
+                                            <line x1="250" y1="90" x2="430" y2="285" />
+                                            <line x1="250" y1="90" x2="520" y2="285" />
+                                            <line x1="250" y1="90" x2="620" y2="285" />
+                                        </g>
+
+                                        <!-- 1. INVESTED CYLINDER (Gold) -->
+                                        <g id="cyl-1" class="pillar-group">
+                                            <ellipse id="cyl-1-shadow" cx="120" cy="232" rx="34" ry="12" fill="url(#contactShadow)" />
+                                            <path id="cyl-1-side" d="M 90,230 A 30,12 0 0,0 150,230 L 150,140 A 30,12 0 0,1 90,140 Z" fill="url(#cylGoldSide)" />
+                                            <ellipse id="cyl-1-top" cx="120" cy="140" rx="30" ry="12" fill="url(#cylGoldTop)" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" />
+                                            
+                                            <!-- Floating Value Tooltip -->
+                                            <g id="cyl-1-badge" class="floating-badge">
+                                                <rect x="78" y="98" width="84" height="22" rx="11" fill="#FFFFFF" stroke="#F5A623" stroke-width="1.5" style="filter: drop-shadow(0px 2px 6px rgba(245,166,35,0.18));" />
+                                                <text x="120" y="113" font-family="'Outfit'" font-size="10.5" font-weight="700" fill="#B38F00" text-anchor="middle">₹0</text>
+                                            </g>
+                                            <text id="lbl-pillar-1" x="120" y="262" font-family="'Outfit'" font-size="12" fill="#64748B" font-weight="700" text-anchor="middle" letter-spacing="0.05em">INVESTED</text>
+                                        </g>
+
+                                        <!-- 2. WITHDRAWN / RETURNS CYLINDER (Blue) -->
+                                        <g id="cyl-2" class="pillar-group">
+                                            <ellipse id="cyl-2-shadow" cx="250" cy="232" rx="34" ry="12" fill="url(#contactShadow)" />
+                                            <path id="cyl-2-side" d="M 220,230 A 30,12 0 0,0 280,230 L 280,190 A 30,12 0 0,1 220,190 Z" fill="url(#cylBlueSide)" />
+                                            <ellipse id="cyl-2-top" cx="250" cy="190" rx="30" ry="12" fill="url(#cylBlueTop)" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" />
+                                            
+                                            <!-- Floating Value Tooltip -->
+                                            <g id="cyl-2-badge" class="floating-badge">
+                                                <rect x="208" y="148" width="84" height="22" rx="11" fill="#FFFFFF" stroke="#2563EB" stroke-width="1.5" style="filter: drop-shadow(0px 2px 6px rgba(37,99,235,0.18));" />
+                                                <text x="250" y="163" font-family="'Outfit'" font-size="10.5" font-weight="700" fill="#2563EB" text-anchor="middle">₹0</text>
+                                            </g>
+                                            <text id="lbl-pillar-2" x="250" y="262" font-family="'Outfit'" font-size="12" fill="#64748B" font-weight="700" text-anchor="middle" letter-spacing="0.05em">WITHDRAWN</text>
+                                        </g>
+
+                                        <!-- 3. WEALTH CYLINDER (Green) -->
+                                        <g id="cyl-3" class="pillar-group">
+                                            <ellipse id="cyl-3-shadow" cx="380" cy="232" rx="34" ry="12" fill="url(#contactShadow)" />
+                                            <path id="cyl-3-side" d="M 350,230 A 30,12 0 0,0 410,230 L 410,90 A 30,12 0 0,1 350,90 Z" fill="url(#cylGreenSide)" />
+                                            <ellipse id="cyl-3-top" cx="380" cy="90" rx="30" ry="12" fill="url(#cylGreenTop)" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" />
+                                            
+                                            <!-- Floating Value Tooltip -->
+                                            <g id="cyl-3-badge" class="floating-badge">
+                                                <rect x="338" y="48" width="84" height="22" rx="11" fill="#FFFFFF" stroke="#10B981" stroke-width="1.5" style="filter: drop-shadow(0px 2px 6px rgba(16,185,129,0.18));" />
+                                                <text x="380" y="63" font-family="'Outfit'" font-size="10.5" font-weight="700" fill="#059669" text-anchor="middle">₹0</text>
+                                            </g>
+                                            <text id="lbl-pillar-3" x="380" y="262" font-family="'Outfit'" font-size="12" fill="#64748B" font-weight="700" text-anchor="middle" letter-spacing="0.05em">WEALTH</text>
+                                        </g>
+                                    </svg>
+                                </div>
+                            </div>
+                            <p class="chart-disclaimer"><i class="fa-solid fa-chart-simple text-green"></i> Visual heights reflect active wealth scaling and speed of compound interest.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BOTTOM RESULTS SECTION: WEALTH BREAKDOWN & GRAPHICS -->
+                <div class="bottom-results-grid">
+                    <!-- KEY NUMBERS SUMMARY CARD (2x2 Grid) -->
+                    <div class="calculator-card results-summary-card">
+                        <h2 class="section-title" id="results-card-title">Wealth Breakdown</h2>
+                        
+                        <div class="results-metrics-grid">
+                            <div class="metric-box metric-gold">
+                                <span class="metric-label" id="lbl-metric-1">Total Invested</span>
+                                <span class="metric-value font-outfit" id="val-metric-1">₹0</span>
+                            </div>
+                            <div class="metric-box metric-blue">
+                                <span class="metric-label" id="lbl-metric-2">Est. Returns</span>
+                                <span class="metric-value font-outfit" id="val-metric-2">₹0</span>
+                            </div>
+                            <div class="metric-box metric-green">
+                                <span class="metric-label" id="lbl-metric-3">Total Wealth</span>
+                                <span class="metric-value font-outfit" id="val-metric-3">₹0</span>
+                            </div>
+                            <div class="metric-box metric-teal">
+                                <span class="metric-label" id="lbl-metric-4">Growth Multiplier</span>
+                                <span class="metric-value font-outfit" id="val-metric-4">0.0x</span>
+                            </div>
+                        </div>
+ 
+                        <!-- Dynamic Caution/Safe Indicator Box -->
+                        <div id="calculator-alert-box" class="alert-box hidden">
+                            <i id="calculator-alert-icon" class="fa-solid"></i>
+                            <div class="alert-content">
+                                <span class="alert-title" id="calculator-alert-title">Plan Sustainability</span>
+                                <span class="alert-desc" id="calculator-alert-desc">Plan calculations status.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- GRAPHICS CARD (CHARTS ONLY) -->
+                    <div class="calculator-card graphics-card">
+                        
+                        <div class="graphics-tabs">
+                            <button class="graphics-tab-btn active" id="gt-chart" onclick="switchGraphicsTab('chart')">
+                                <i class="fa-solid fa-chart-area"></i> Growth Chart
+                            </button>
+                            <button class="graphics-tab-btn" id="gt-donut" onclick="switchGraphicsTab('donut')">
+                                <i class="fa-solid fa-chart-pie"></i> Distribution
+                            </button>
+                        </div>
+
+                        <div class="graphics-viewports">
+                            <!-- Chart.js Growth Area Chart -->
+                            <div id="viewport-chart" class="graphics-viewport active">
+                                <canvas id="growthLineChart"></canvas>
+                            </div>
+
+                            <!-- Chart.js Doughnut Chart -->
+                            <div id="viewport-donut" class="graphics-viewport">
+                                <div class="donut-chart-container">
+                                    <canvas id="distributionDonutChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BOTTOM SECTION: PROJECTION TABLE & EXPORTS -->
+                <section class="projection-table-section calculator-card">
+                    <div class="table-header-controls">
+                        <h2 class="section-title"><i class="fa-solid fa-table-list text-blue"></i> Year-by-Year Growth Table</h2>
+                        <div class="export-actions">
+                            <button class="btn-outline" onclick="exportCSV()">
+                                <i class="fa-solid fa-file-csv"></i> Export CSV
+                            </button>
+                            <button class="btn-outline" onclick="window.print()">
+                                <i class="fa-solid fa-file-pdf"></i> PDF Report
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Projection Table -->
+                    <div class="table-responsive-wrapper">
+                        <table class="projection-table" id="table-projections">
+                            <thead>
+                                <tr id="table-head-row">
+                                    <!-- Dynamic header injection depending on mode -->
+                                    <th>Year</th>
+                                    <th>Monthly Investment</th>
+                                    <th>Investment (Annual)</th>
+                                    <th>Total Invested</th>
+                                    <th>Interest Earned</th>
+                                    <th>Closing Balance</th>
+                                </tr>
+                            </thead>
+                            <tbody id="table-body">
+                                <!-- Dynamic rows injection -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- EDUCATIONAL INFORMATIONAL SECTION: SIP, SWP, LUMPSUM -->
+                <section class="wealth-education-section calculator-card">
+                    <h2 class="section-title"><i class="fa-solid fa-graduation-cap text-green"></i> Understanding Wealth Builders</h2>
+                    <p class="section-subtitle-edu">Explore the mathematical mechanics of SIP, SWP, and Lumpsum investments to design your ultimate financial roadmap.</p>
+                    
+                    <div class="education-grid">
+                        <!-- SIP Info Card -->
+                        <div class="education-box border-green" id="edu-sip">
+                            <div class="edu-icon-header">
+                                <i class="fa-solid fa-chart-line text-green"></i>
+                                <h3>SIP (Systematic Investment Plan)</h3>
+                            </div>
+                            <p class="edu-desc">SIP is a disciplined method of investing fixed sums regularly (monthly) into mutual funds. It promotes financial habit-forming and unlocks the dual engines of financial growth:</p>
+                            <div class="edu-points">
+                                <div class="edu-point-item">
+                                    <span class="edu-point-bullet bullet-green"><i class="fa-solid fa-scale-balanced"></i></span>
+                                    <div class="edu-point-text">
+                                        <strong>Rupee Cost Averaging:</strong>
+                                        <span>Automatically buys more units when prices are low and fewer when high, averaging out volatility without timing the market.</span>
+                                    </div>
+                                </div>
+                                <div class="edu-point-item">
+                                    <span class="edu-point-bullet bullet-green"><i class="fa-solid fa-cubes"></i></span>
+                                    <div class="edu-point-text">
+                                        <strong>Compounding Engine:</strong>
+                                        <span>Reinvesting returns builds a snowball effect, accelerating wealth over long horizons.</span>
+                                    </div>
+                                </div>
+                                <div class="edu-point-item">
+                                    <span class="edu-point-bullet bullet-green"><i class="fa-solid fa-circle-arrow-up"></i></span>
+                                    <div class="edu-point-text">
+                                        <strong>Annual Step-Up:</strong>
+                                        <span>Increasing your monthly contribution by even 5-10% annually (Step-Up) can multiply your final corpus dramatically.</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- SWP Info Card -->
+                        <div class="education-box border-blue" id="edu-swp">
+                            <div class="edu-icon-header">
+                                <i class="fa-solid fa-hand-holding-dollar text-blue"></i>
+                                <h3>SWP (Systematic Withdrawal Plan)</h3>
+                            </div>
+                            <p class="edu-desc">SWP is the inverse of SIP. It allows you to invest a lumpsum amount and withdraw a fixed amount regularly (monthly) while the remaining balance continues compounding:</p>
+                            <div class="edu-points">
+                                <div class="edu-point-item">
+                                    <span class="edu-point-bullet bullet-blue"><i class="fa-solid fa-money-bill-transfer"></i></span>
+                                    <div class="edu-point-text">
+                                        <strong>Passive Cash Flow:</strong>
+                                        <span>Ideal for retirement or regular income needs, providing stable cash flows without depleting your capital all at once.</span>
+                                    </div>
+                                </div>
+                                <div class="edu-point-item">
+                                    <span class="edu-point-bullet bullet-blue"><i class="fa-solid fa-percent"></i></span>
+                                    <div class="edu-point-text">
+                                        <strong>Tax Efficiency:</strong>
+                                        <span>Only the capital gains portion of withdrawals is subject to tax, making it superior to standard fixed deposits.</span>
+                                    </div>
+                                </div>
+                                <div class="edu-point-item">
+                                    <span class="edu-point-bullet bullet-blue"><i class="fa-solid fa-shield-halved"></i></span>
+                                    <div class="edu-point-text">
+                                        <strong>Inflation Shield:</strong>
+                                        <span>Factoring in annual inflation adjustments protects your future purchasing power from erosion.</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Lumpsum Info Card -->
+                        <div class="education-box border-gold" id="edu-lumpsum">
+                            <div class="edu-icon-header">
+                                <i class="fa-solid fa-coins text-gold"></i>
+                                <h3>Lumpsum Investment</h3>
+                            </div>
+                            <p class="edu-desc">Lumpsum is a one-time investment made into equity or debt instruments. It maximizes compounding exposure over long periods:</p>
+                            <div class="edu-points">
+                                <div class="edu-point-item">
+                                    <span class="edu-point-bullet bullet-gold"><i class="fa-solid fa-bolt"></i></span>
+                                    <div class="edu-point-text">
+                                        <strong>Compounding Exposure:</strong>
+                                        <span>Your entire capital begins compounding from Day 1, maximizing growth multipliers over long horizons.</span>
+                                    </div>
+                                </div>
+                                <div class="edu-point-item">
+                                    <span class="edu-point-bullet bullet-gold"><i class="fa-solid fa-calendar-check"></i></span>
+                                    <div class="edu-point-text">
+                                        <strong>Opportunistic Allocation:</strong>
+                                        <span>Perfect for deploying windfalls, bonuses, or cash reserves during market corrections.</span>
+                                    </div>
+                                </div>
+                                <div class="edu-point-item">
+                                    <span class="edu-point-bullet bullet-gold"><i class="fa-solid fa-hourglass-start"></i></span>
+                                    <div class="edu-point-text">
+                                        <strong>Patience Key:</strong>
+                                        <span>Long-term lumpsum investments are highly resilient to short-term volatility, yielding strong CAGR results.</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="app-footer">
+            <div class="footer-container">
+                <p>&copy; 2026 AlphaNifty Wealth Technologies. All investment calculations are projections and subject to market rates.</p>
+                <div class="footer-links">
+                    <a href="#">Security</a>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="toast-notification">
+        <i class="fa-solid fa-circle-check toast-icon"></i>
+        <span id="toast-message" class="toast-message">Action successful!</span>
+    </div>
+
+    <!-- Load JavaScript -->
+    <script src="calculator.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
